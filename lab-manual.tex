@@ -1,0 +1,49 @@
+\documentclass[12pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{upgreek}
+
+% for dots in TOC:
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\setlength{\parindent}{0mm}
+
+\begin{document}
+
+{\centering
+\LARGE Physics I-II Lab Manual \par
+}
+\hfill \break
+
+{\centering
+\large Preface \par
+}
+\hfill \break \vspace{-4mm}
+
+This is the lab manual for Physics 2211L, 2212L, 1111L, and 1112L taught by Dr. Nathan Harrison.
+In some labs you will have to copy and paste small amounts of code;
+it is recommended that you copy from the the original \LaTeX \ source, \textit{not} from the PDF file which often leads to formatting errors.
+Another common mistake is to not unzip the Java-based simulations;
+if the simulation opens but the screen is blank it is because you didn't unzip the file.
+\vfill
+\textcopyright \ Nathan Harrison 2018
+\pagebreak \clearpage
+
+\tableofcontents
+\pagebreak \clearpage
+
+\input{surfaceAreaVolumeDensity.tex}
+\input{fitting1Dmotion.tex}
+\input{projectileMotion.tex}
+\input{forces.tex}
+\input{energy.tex}
+\input{workPower.tex}
+\input{momentum.tex}
+\input{torque.tex}
+\input{angularKinematics.tex}
+\input{orbits.tex}
+
+\end{document}

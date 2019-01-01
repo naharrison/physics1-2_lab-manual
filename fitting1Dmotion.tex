@@ -1,0 +1,121 @@
+\section{Constant acceleration 1-D motion and data fitting}
+
+\underline{\textbf{Part 1}} \par
+Suppose you throw a ball straight up with initial height 1.0 m and initial velocity 2.1 m/s.
+Create a plot of the ball's height as a function of time (assume $t_{initial} = 0$).
+\hfill \break
+\hfill \break
+Example of how to plot in SageMath:
+\begin{verbatim}
+t = var("t")
+p1 = plot(sin(10*t) + sin(10.1*t), (t, 15, 40), color="red")
+g = Graphics()
+g += p1
+g.show()
+\end{verbatim}
+\hfill \break \vspace{-4mm}
+
+\underline{\textbf{Part 2}} \par
+Sketch a plot of the ball's position on the $y_1$ axis as a function of time.
+Repeat for the $y_2$ axis.
+\begin{figure}[H]
+\includegraphics[scale=0.4]{figures/fitting1Dmotion/twoAxisFreeFall.png}
+\end{figure}
+
+\underline{\textbf{Part 3}} \par
+Match each set of parameters below to one of the colored curves.
+Briefly justify your answers.
+\begin{itemize}
+  \item $x_i = 0 \ m$, $v_i = -5 \ m/s$, $a = 5 \ m/s^2$
+  \item $x_i = 0 \ m$, $v_i = 2 \ m/s$, $a = -4 \ m/s^2$
+  \item $x_i = 8 \ m$, $v_i = 4 \ m/s$, $a = 3 \ m/s^2$
+\end{itemize}
+\begin{figure}[H]
+\includegraphics[scale=0.4]{figures/fitting1Dmotion/threeCurves.png}
+\end{figure}
+
+\underline{\textbf{Part 4}} \par
+Now suppose you have some data collected from similar experiments on two other planets (different gravitational accelerations) (see Data section below).
+Use this data to determine
+(a) the gravitational acceleration of each planet,
+(b) the orientation of the axis used in the experiment (up or down),
+(c) the magnitude and direction (up or down) of the initial velocity, and
+(d) the starting coordinate of the ball.
+Use the following approach:
+\begin{enumerate}
+\item Download manfit-app.zip from https://github.com/naharrison/manual-fitter/releases, unzip it, and open the jar file.
+\item From the unzipped folder, also open data/XYdata.txt and data/fitFunction.txt. Try to understand how the data in these files is being used by the application.
+\item Copy the data below into XYdata.txt. Also modify fitFunction.txt to use a function that describes an object under constant acceleration: [0] + [1]*x + 0.5*[2]*x\string^2; the lines under the function are the minimum and maximum possible values for each parameter.
+\item Restart the application and tune the parameters to determine the initial position, initial velocity, and acceleration.
+\end{enumerate}
+
+\pagebreak
+
+\underline{\textbf{Data}} \par
+\begin{multicols}{2}
+\begin{verbatim}
+Planet 1:
+time (s)  y1 (m)
+0.00      20.20
+0.10      18.90
+0.20      17.72
+0.30      16.28
+0.40      15.44
+0.50      14.78
+0.60      13.63
+0.70      12.65
+0.80      12.31
+0.90      11.66
+1.00      11.41
+1.10      10.77
+1.20      10.13
+1.30      9.82
+1.40      9.59
+1.50      9.50
+1.60      9.75
+1.70      9.76
+1.80      9.53
+1.90      9.68
+2.00      9.77
+2.10      10.34
+2.20      10.50
+2.30      11.19
+2.40      11.60
+2.50      12.10
+\end{verbatim}
+
+\columnbreak
+
+\begin{verbatim}
+Planet 2:
+time (s)  y2 (m)
+0.00      -15.35
+0.10      -14.17
+0.20      -13.23
+0.30      -12.16
+0.40      -11.25
+0.50      -10.41
+0.60      -9.37
+0.70      -7.82
+0.80      -5.67
+0.90      -3.65
+1.00      -2.49
+1.10      0.09
+1.20      2.12
+1.30      6.17
+1.40      8.58
+1.50      9.04
+1.60      11.96
+1.70      15.47
+1.80      17.06
+1.90      19.96
+2.00      23.01
+2.10      26.00
+2.20      30.62
+2.30      32.30
+2.40      34.93
+2.50      40.45
+\end{verbatim}
+\end{multicols}
+
+\pagebreak \clearpage

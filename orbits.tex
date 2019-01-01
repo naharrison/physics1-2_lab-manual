@@ -1,0 +1,112 @@
+\section{Orbits}
+
+In this lab you will use SageMath to numerically calculate the paths for several different kinds of orbital motion.
+\hfill \break
+
+For simplicity, assume that for the given universe, planet, and unit system the product $GM_{planet} = 1$.
+Also assume that the given satellite has a mass of 1.
+Under these conditions the gravitational force is $F_g = 1/r^2$ and the requirement for circular motion is $F_c = v^2/r$.
+(Do not make these assumptions outside of this lab.)
+\hfill \break
+
+\underline{\textbf{Part 0}} \par
+Copy the orbit\_plot.sage script (below) and run the following example:
+\begin{verbatim}
+radius = var("radius")
+
+blue_circle = circle((0, 0), 0.1, color="blue", fill=True, zorder=100, figsize=[5.5, 5.5])
+planet_label = text("Planet", (0, 0), color="black", fontsize="large", zorder=101)
+
+plot1 = orbit_plot(0.5, 0.0, 1.0, 1.0/(radius*radius), 0.01, 1.0, "green")
+plot2 = orbit_plot(0.6, -1.0, 0.9, 1.0/(radius*radius), 0.01, 1.0, "red")
+
+g = Graphics()
+g += blue_circle
+g += planet_label
+g += plot1
+g += plot2
+g.set_axes_range(-0.8, 0.8, -0.8, 0.8)
+g.show()
+\end{verbatim}
+%
+\begin{figure}[H]
+\includegraphics[scale=0.60]{figures/orbits/part0.png}
+\end{figure}
+%
+Make sure you understand what each argument of orbit\_plot() means;
+Refer to the table below:
+\begin{enumerate}
+  \item $x_i$ of the satellite ($y_i = 0$ by default)
+  \item $v_{xi}$ of the satellite
+  \item $v_{yi}$ of the satellite
+  \item the gravitational force law, i.e. $F_g = 1/r^2$ (see above)
+  \item the time interval between data points, make this smaller for more detail
+  \item the path length at which the calculations stops, make this larger to see more of the path
+  \item the color of the data points
+\end{enumerate}
+Adjust a few settings to see how they affect your resulting plot.
+\hfill \break
+
+\underline{\textbf{Part 1}} \par
+Create two circular orbits of different radii.
+Record your initial values and a screenshot of your plot.
+%
+\begin{figure}[H]
+\includegraphics[scale=0.60]{figures/orbits/part1.png}
+\end{figure}
+
+\underline{\textbf{Part 2}} \par
+a) Create an elliptical orbit by either
+\begin{itemize}
+\item making the velocity too large
+\item making the velocity too small
+\item making the velocity non-tangent to a circular path.
+\end{itemize}
+b) Create a case where the velocity is larger than the escape velocity.
+
+Record your conditions and a screenshot of your plot.
+%
+\begin{figure}[H]
+\includegraphics[scale=0.60]{figures/orbits/part2.png}
+\end{figure}
+
+\underline{\textbf{Part 3}} \par
+Design your own universe with a different gravitational force law.
+Experiment until you find an interesting result.
+Record your conditions and a screenshot of your plot.
+%
+\begin{figure}[H]
+\includegraphics[scale=0.60]{figures/orbits/part3.png}
+\end{figure}
+
+\underline{orbit\_plot.sage} \par
+\begin{verbatim}
+__author__  = "Nathan Andrew Harrison"
+__license__ = "GPL-3.0"
+
+# see Goldstein & Poole 3.7 and 3.11
+#                       ^^^     ^^^^
+#                       2 second order ODEs converted to 4 1st order ODEs
+
+
+def orbit_plot(radius_i, vx_i, vy_i, force, stepsize, endpt, plotcolor):
+
+  # variables
+  theta, thetaPrime, radius, radiusPrime, time = var("theta, thetaPrime, radius, radiusPrime, time")
+  theta_i = 0.0
+  
+  # calculations
+  x_i = radius_i*cos(theta_i)
+  y_i = radius_i*sin(theta_i)
+  radiusPrime_i = 2.0*x_i*vx_i + 2.0*y_i*vy_i
+  thetaPrime_i = ((vy_i*x_i - y_i*vx_i)/(x_i*x_i))/(pow(y_i/x_i, 2.0) + 1.0)
+  
+  sol = desolve_system_rk4([thetaPrime, -2.0*radiusPrime*thetaPrime/radius, radiusPrime, -force + radius*thetaPrime*thetaPrime], [theta, thetaPrime, radius, radiusPrime], ics=[0, theta_i, thetaPrime_i, radius_i, radiusPrime_i], ivar=time, end_points=[0, endpt], step=stepsize)
+  
+  
+  pts = [[m*cos(k), m*sin(k)] for j, k, l, m, n in sol]
+  
+  return list_plot(pts, color=plotcolor)
+\end{verbatim}
+
+\pagebreak \clearpage
