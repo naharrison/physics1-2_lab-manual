@@ -1,0 +1,61 @@
+\section{Chaos}
+
+In this lab you will study some interesting properties of chaotic systems.
+
+\vspace{\baselineskip}
+
+\underline{\textbf{Part 1}} \par
+Draw 3 points on a piece of paper to form a triangle.
+Label the points 0, 1, and 2.
+Also randomly draw a 4th point - this will be the starting point of the experiment.
+Next, randomly generate either a 0, 1, or 2 (e.g. by rolling dice), the number generated will correspond to one of the corners of the triangle.
+Make a new point halfway between the starting point and the corner of the triangle selected in the previous step; this point becomes the new starting point for the next iteration.
+Repeat this process of making new points halfway between the last point and the corner of the triangle randomly selected many times.
+
+\vspace{\baselineskip}
+
+Do at least 10 points by hand until you get the idea.
+Your final result should contain at least 2000 points.
+If you are a student who insists that learning basic coding is not useful then you can do all 2000 points by hand.
+Otherwise, try the following SageMath script.
+
+\begin{verbatim}
+# Create a graphics object to display the points
+g = Graphics()
+
+
+# Add 3 points that make up a triangle
+tri = [ (1, 1), (3, 1), (2, 3) ]
+g += point(tri, color="red", size=35)
+
+
+# Choose a random starting point
+x = 2.6 
+y = 1.3 
+g += point((x, y), color="black", size=10)
+
+
+# Generate random numbers (0, 1, or 2)
+# corresponding to points on the triangle.
+# For each iteration, move halfway from the 
+# last point to the chosen triangle point.
+
+nPts = 2500
+for i in range(0, nPts):
+  rand = ZZ.random_element(0, 3)
+  x = x + 0.50*(tri[rand][0] - x) # experiment with the fraction
+  y = y + 0.50*(tri[rand][1] - y) # experiment with the fraction
+  g += point((x, y), color="black", size=10)
+
+
+g.show()
+\end{verbatim}
+
+% some interesting results:
+% 0.25 total randomness
+% 0.5 perfect fractal pattern
+% 0.8 3 groups of 3 groups of 3 groups
+
+% TODO Add barnsley fern example
+
+\pagebreak \clearpage
