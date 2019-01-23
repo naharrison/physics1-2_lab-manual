@@ -8,16 +8,16 @@ In this lab you will study some interesting properties of chaotic systems.
 Draw 3 points on a piece of paper to form a triangle.
 Label the points 0, 1, and 2.
 Also randomly draw a 4th point - this will be the starting point of the experiment.
-Next, randomly generate either a 0, 1, or 2 (e.g. by rolling dice), the number generated will correspond to one of the corners of the triangle.
+Next, randomly generate either a 0, 1, or 2 (e.g. by rolling a 3-sided die (or a more standard 6-sided die with a slightly more clever mapping algorithm)), the number generated will correspond to one of the corners of the triangle.
 Make a new point halfway between the starting point and the corner of the triangle selected in the previous step; this point becomes the new starting point for the next iteration.
 Repeat this process of making new points halfway between the last point and the corner of the triangle randomly selected many times.
 
 \vspace{\baselineskip}
 
 Do at least 10 points by hand until you get the idea.
-Your final result should contain at least 2000 points.
-If you are a student who insists that learning basic coding is not useful then you can do all 2000 points by hand.
-Otherwise, try the following SageMath script.
+Your final result should contain at least 2500 points.
+If you are a student who insists that learning basic coding is not useful then you can do all 2500 points by hand.
+Otherwise, try the following SageMath script (a few adjustments will be needed).
 
 \begin{verbatim}
 # Create a graphics object to display the points
@@ -40,11 +40,11 @@ g += point((x, y), color="black", size=10)
 # For each iteration, move halfway from the 
 # last point to the chosen triangle point.
 
-nPts = 2500
+nPts = 20
 for i in range(0, nPts):
   rand = ZZ.random_element(0, 3)
-  x = x + 0.50*(tri[rand][0] - x) # experiment with the fraction
-  y = y + 0.50*(tri[rand][1] - y) # experiment with the fraction
+  x = x + 0.25*(tri[rand][0] - x) # experiment with the fraction
+  y = y + 0.25*(tri[rand][1] - y) # experiment with the fraction
   g += point((x, y), color="black", size=10)
 
 
@@ -56,6 +56,94 @@ g.show()
 % 0.5 perfect fractal pattern
 % 0.8 3 groups of 3 groups of 3 groups
 
-% TODO Add barnsley fern example
+\underline{\textbf{Part 2}} \par
+
+This time choose (0, 0) as your starting point and let's call this point $(x_0, y_0)$.
+The next point will be $(x_1, y_1)$, and then $(x_2, y_2)$, etc.
+Just like before, each point will depend on the previous point and on some randomly generated number.
+Imagine rolling a 100-sided die, with sides labeled 0-99.
+
+\vspace{\baselineskip}
+
+If you roll a 0, then
+
+\begin{align}
+x_{n+1} &= 0 \\
+y_{n+1} &= 0.16 y_n
+\end{align}
+
+\vspace{\baselineskip}
+
+If you roll 1-85, then
+
+\begin{align}
+x_{n+1} &= 0.85 x_n + 0.04 y_n \\
+y_{n+1} &= -0.04 x_n + 0.85 y_n + 1.6
+\end{align}
+
+\vspace{\baselineskip}
+
+If you roll 86-92, then
+
+\begin{align}
+x_{n+1} &= 0.2 x_n - 0.26 y_n \\
+y_{n+1} &= 0.23 x_n + 0.22 y_n + 1.6
+\end{align}
+
+\vspace{\baselineskip}
+
+If you roll 93-99, then
+
+\begin{align}
+x_{n+1} &= -0.15 x_n + 0.28 y_n \\
+y_{n+1} &= 0.26 x_n + 0.24 y_n + 0.44
+\end{align}
+
+\vspace{\baselineskip}
+
+Do at least 10 points by hand until you get the idea.
+Use the SageMath starter code below to create an example with at least 20000 points (might take a few minutes to draw).
+
+\begin{verbatim}
+# Create a graphics object to display the points
+g = Graphics()
+
+
+# Set the starting point
+x = 0.0 
+y = 0.0 
+g += point((x, y), color="black", size=1)
+
+
+# Generate random numbers 0-99
+# and follow the given algorithm
+
+nPts = 20
+for i in range(0, nPts):
+  previousX = x 
+  previousY = y 
+  rand = ZZ.random_element(0, 100)
+
+  if rand == 0:
+    x = 0.0 
+    y = 0.16*previousY
+
+  if rand >= 1 and rand <= 85: 
+    x =
+    y =
+
+  if rand >= 86 and rand <= 92: 
+    x =
+    y =
+
+  if rand >= 93 and rand <= 99: 
+    x =
+    y =
+
+  g += point((x, y), color="green", size=1)
+
+g.show()
+\end{verbatim}
+
 
 \pagebreak \clearpage
