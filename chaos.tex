@@ -146,4 +146,45 @@ g.show()
 \end{verbatim}
 
 
+\underline{\textbf{Part 3}} \par
+
+Experiment with the following ``Julia Set''
+
+\begin{verbatim}
+from sage.repl.image import Image
+width = 1600
+height = 900 
+img = Image('RGB', (width, height))
+pixels = img.pixels()
+
+cx = -0.8
+cy = 0.156
+
+max_itr = 2000
+
+for x in range(img.width()):
+   for y in range(img.height()):
+      zx = -1.8 + (3.6/width)*x
+      zy = -0.9 + (1.8/height)*y
+            
+      itr = 0 
+      while zx*zx + zy*zy < 4.00 and itr < max_itr:
+         xtemp = zx*zx - zy*zy
+         zy = 2*zx*zy + cy
+         zx = xtemp + cx
+         itr += 1
+
+      rgb = 255*sqrt(itr/max_itr) # black on white
+      #rgb = 255*(1 - itr/max_itr) # white on black
+      pixels[x, y] = (rgb, rgb, rgb)
+
+      if y == 0 and x%50 == 0: print x
+
+img.show()
+\end{verbatim}
+
+\underline{\textbf{Part 4}} \par
+
+Recaman sequence.
+
 \pagebreak \clearpage
