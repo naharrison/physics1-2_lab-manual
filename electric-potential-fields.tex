@@ -24,7 +24,7 @@ Below is an example.
 \begin{verbatim}
 x, y = var("x y")
 g = Graphics()
-g += contour_plot(1.5 + 0.2*x*y, (x, -4, 4), (y, -4, 4), fill=False, cmap='jet', labels=True, contours=[0, 1, 2, 3, 4], label_fontsize=14)
+g += contour_plot(1.5 + 0.2*x*y, (x, -4, 4), (y, -4, 4), fill=False, cmap="jet", labels=True, contours=[0, 1, 2, 3, 4], label_fontsize=14)
 g += plot_vector_field((y/2, -x/2) , (x, -4, 4), (y, -4, 4)) 
 g.show()
 \end{verbatim}
