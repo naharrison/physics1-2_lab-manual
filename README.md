@@ -17,3 +17,5 @@ Run this command twice (necessary for proper table of contents), the output will
 * Next you'll see a window with some default text. You can modify or just leave it as it is. Scroll to the bottom of the page and click the green "Commit new file" button. This will initialize your repository and now you can add additional files by simply clicking the "Upload files" button:
 
 <img src="https://github.com/naharrison/physics1-2_lab-manual/blob/master/figures/upload_instructions/figure2.png" width="800">
+
+* Important! Upload your lab reports as pdf files. Do not upload Word documents. (To convert from Word to pdf, do File -> Export...)
